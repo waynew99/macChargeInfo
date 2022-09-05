@@ -1,0 +1,9 @@
+#!/bin/zsh
+# Prints the AC Charger Information and Battery Health Information from System Report.
+
+temp=$(system_profiler SPPowerDataType | sed -n '/AC Charger Information:/, /Power Events:/p' | ghead -n -1)
+echo "\n$temp\n"
+
+battery=$(system_profiler SPPowerDataType | sed -n '/Health Information:/,$p' | tail -n+1 | head -5)
+echo "\n$battery\n"
+
